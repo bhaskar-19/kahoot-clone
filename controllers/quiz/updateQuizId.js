@@ -12,14 +12,29 @@ async function updateQuestionAndOptions(quiz, questions)
         question.quiz = quiz._id;
 
         const savedQuestion = await question.save();
-
+        const questionOptions = [];
+        let correctOptionId = null;
         for (let j = 0; j < options.length; j++) {
             const { title, isCorrect } = options[j];
             const option = new Option({ title, isCorrect });
             option.question = savedQuestion._id;
-            await option.save();
+            const savedOption = await option.save();
+            if(isCorrect)
+            {
+                correctOptionId = savedOption._id;
+            }
+            questionOptions.push(savedOption._id);
+        }
+        //console.log(correctOptionId);
+        if(correctOptionId === undefined|| correctOptionId === null)
+        {
+            console.log("HERE");
+            throw new Error("Not authorized to update this quiz");
         }
 
+        question.options = questionOptions;
+        question.correctOption = correctOptionId;
+        await question.save();
         quiz.questions.push(savedQuestion._id);
     }
   
@@ -63,10 +78,18 @@ async function updateQuizById(req, res)
             await Option.deleteMany({question: questionId});
         }
         
-        updatedQuiz = updateQuestionAndOptions(quiz, questions);
-        res.status(200).json({
-            success: true,
-            updatedQuiz
+        updateQuestionAndOptions(quiz, questions)
+        .then((updatedQuiz)=>{
+            res.status(200).json({
+                success: true,
+                updatedQuiz
+            });
+        })
+        .catch((error)=>{
+            res.status(300).json({
+                success: false,
+                message: error
+            })
         });
     }
     catch(error)

@@ -9,7 +9,7 @@ async function saveQuestionsAndOptionsToDb(quiz, questions)
     for(let i=0; i<questions.length; i++)
     {
         const {title, options} = questions[i];
-        let correctOption;
+        let correctOption = null;
         const questionOptions =[]; // storing a options for each question
         for(let j=0; j<options.length; j++)
         {
@@ -27,7 +27,7 @@ async function saveQuestionsAndOptionsToDb(quiz, questions)
         }
         if(correctOption === undefined|| correctOption === null)
         {
-            return false;
+            throw new Error("Whoops!");
         }
         // Create new question
         const question = new Question({
@@ -65,21 +65,20 @@ async function createQuiz(req, res)
         const questions = req.body.questions;
 
         //Save questions and options to database and add to quiz
-        if(saveQuestionsAndOptionsToDb(quiz, questions))
-        {
+        saveQuestionsAndOptionsToDb(quiz, questions)
+        .then((updatedQuiz)=>{
             res.status(201).json({
                 success: true,
                 message: 'Quiz created successfully',
                 quiz
             });
-        }
-        else
-        {
+        })
+        .catch((error)=>{
             res.status(400).json({
                 success: false,
                 message: 'please choose any one as a correct option'
             });
-        }
+        });
     }
     catch (error) 
     {
