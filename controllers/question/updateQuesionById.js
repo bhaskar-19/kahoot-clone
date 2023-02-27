@@ -1,5 +1,6 @@
 const Question = require('../../models/quizSchema').questionModel;
 const Quiz = require('../../models/quizSchema').quizModel;
+const Option = require('../../models/quizSchema').optionModel;
 async function updateQuestionById(req, res)
 {
     try
@@ -15,7 +16,8 @@ async function updateQuestionById(req, res)
         }
 
         //Checking a question is exists or not
-        const question = await Question.findOne({_id: req.params.questionId, quiz: req.params.quizId}).populate('options');
+        const question = await Question.findOne({_id: req.params.questionId, quiz: req.params.quizId});
+        
         if(!question)
         {
             return res.status(404).json({
@@ -43,29 +45,26 @@ async function updateQuestionById(req, res)
         // Update the options if provided
         if (options) 
         {
-            // Loop through the provided options
-            for (const option of options) 
+            question.options = [];
+            await Option.deleteMany({question: question._id});
+            const optionIds = [];
+            for(const option of options)
             {
-                // Find the corresponding option in the database
-                const dbOption = question.options.find(opt => opt._id);
-                console.log(dbOption);
-                // Update the option text and correct status if provided
-                if (dbOption) 
+                const optionData = Option({
+                    title : option.title,
+                    isCorrect : option.isCorrect,
+                    question : question._id
+                });
+                const dbOption = await optionData.save();
+                if(option.isCorrect)
                 {
-                    dbOption.title = option.title;
-                    dbOption.isCorrect = option.isCorrect;
-                    if(option.isCorrect)
-                    {
-                        cid = dbOption._id;
-                    }
-                    
-                    // Save the updated option to the database
-                    await dbOption.save();
+                    cid = dbOption._id;
                 }
+                optionIds.push(dbOption._id);
             }
+            question.options = optionIds;
+            question.correctOption = cid;
         }
-        question.correctOption = cid;
-        // Save the updated question to the database
         await question.save();
         
         res.json(question);
