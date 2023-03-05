@@ -7,7 +7,7 @@ const getAllQuizesCtrl = require('../controllers/quiz/getAllQuizes');
 const getQuizByIdCtrl = require('../controllers/quiz/getQuizById');
 const updateQuizByIdCtrl = require('../controllers/quiz/updateQuizId');
 const deleteQuizByIdCtrl = require('../controllers/quiz/deleteQuizById');
-const joinGameCtrl = require('../controllers/quiz/joinGame');
+const joinGameCtrl = require('../controllers/game/joinGame');
 
 routes.post('/createQuiz',auth, createQuizCtrl.createQuiz);
 routes.get('/quizzes',auth, getAllQuizesCtrl.getAllQuizes);

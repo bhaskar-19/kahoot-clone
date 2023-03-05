@@ -58,7 +58,7 @@ async function createQuiz(req, res)
                                 title: req.body.title,
                                 discription: req.body.discription,
                                 creator: req.body.creator,
-                                gamePin: req.body.gamePin
+                                gamePin: Math.floor(Math.random() * 90000) + 10000
                             });
 
         await quiz.save();
