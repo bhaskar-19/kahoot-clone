@@ -8,9 +8,11 @@ const getQuizByIdCtrl = require('../controllers/quiz/getQuizById');
 const updateQuizByIdCtrl = require('../controllers/quiz/updateQuizId');
 const deleteQuizByIdCtrl = require('../controllers/quiz/deleteQuizById');
 const joinGameCtrl = require('../controllers/game/joinGame');
+const getAllUserQuizesCtrl = require('../controllers/quiz/getAllUserQuizes');
 
 routes.post('/createQuiz',auth, createQuizCtrl.createQuiz);
 routes.get('/quizzes',auth, getAllQuizesCtrl.getAllQuizes);
+routes.get('/quizzes/:creator',auth, getAllUserQuizesCtrl.getAllUserQuizes);
 routes.get('/:id',auth, getQuizByIdCtrl.getQuizById);
 routes.put('/:id',auth, updateQuizByIdCtrl.updateQuizById);
 routes.delete('/:id',auth, deleteQuizByIdCtrl.deleteQuizById);

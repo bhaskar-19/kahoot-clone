@@ -57,8 +57,7 @@ async function createQuiz(req, res)
         const quiz = new Quiz({
                                 title: req.body.title,
                                 discription: req.body.discription,
-                                creator: req.body.creator,
-                                gamePin: Math.floor(Math.random() * 90000) + 10000
+                                creator: req.body.creator
                             });
 
         await quiz.save();
@@ -67,7 +66,7 @@ async function createQuiz(req, res)
         //Save questions and options to database and add to quiz
         saveQuestionsAndOptionsToDb(quiz, questions)
         .then((updatedQuiz)=>{
-            res.status(201).json({
+            res.status(200).json({
                 success: true,
                 message: 'Quiz created successfully',
                 quiz
@@ -83,7 +82,7 @@ async function createQuiz(req, res)
     catch (error) 
     {
         console.error(error);
-        res.status(500).json({
+        res.status(400).json({
           success: false,
           message: 'Internal server error'
         });

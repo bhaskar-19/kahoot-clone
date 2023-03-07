@@ -1,4 +1,4 @@
-#answer1{
+#option1{
     background-color: #4CAF50;
     margin: auto;
     padding: 30px 20px;
@@ -6,7 +6,7 @@
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
 }
-#answer2{
+#option2{
     background-color: #f94a1e;
     margin: auto;
     padding: 30px 20px;
@@ -14,7 +14,7 @@
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
 }
-#answer3{
+#option3{
     background-color: #3399ff;
     margin: auto;
     padding: 30px 20px;
@@ -22,7 +22,7 @@
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
 }
-#answer4{
+#option4{
     background-color: #ff9933;
     margin: auto;
     padding: 30px 20px;

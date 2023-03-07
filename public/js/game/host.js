@@ -1,5 +1,5 @@
 var socket = io();
-var id = "63fc947574e5723a4b8685e2";
+var id = "6405dd652a88b7d458b94557";
 
 socket.on('connect', ()=>{
     $('#players').val = "";

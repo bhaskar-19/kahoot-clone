@@ -6,7 +6,6 @@ const quizSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    description: String,
     creator :{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -14,12 +13,11 @@ const quizSchema = mongoose.Schema({
     },
     questions:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref: 'Question'
+        ref: 'Question',
+        required: true
     }],
     gamePin:{
-        type: String,
-        required: true,
-        unique: true
+        type :[String]
     }
 });
 

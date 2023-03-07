@@ -25,7 +25,7 @@ function socketImplementation(io)
                     socket.emit('noGameFound');
                 }
     
-                const gamePin = quiz.gamePin;
+                const gamePin = Math.floor(Math.random() * 90000) + 10000+'';
                 games.addGame(gamePin, socket.id, false, {playersAnswered: 0, questionLive: false, gameId: id, question: 1});
     
                 const game = games.getGame(socket.id);
@@ -46,7 +46,6 @@ function socketImplementation(io)
             try
             {
                 let gameFound = false;
-                //console.log(JSON.stringify(games));
                 for(let i=0; i<games.games.length; i++)
                 {
                     if(formData.pin == games.games[i].pin)
@@ -87,8 +86,7 @@ function socketImplementation(io)
             const oldHostId = hostId.id;
             console.log(oldHostId);
             const game = games.getGame(oldHostId);
-            console.log(game
-                )
+            console.log(game)
             if(game)
             {
                 game.hostId = socket.id;
@@ -399,9 +397,9 @@ function socketImplementation(io)
         });  
         
         socket.on('disconnect', () => {
-            console.log("dissconnect");
+            console.log("disconnected");
             const game = games.getGame(socket.id);
-            console.log(game);
+            
             if(game)
             {
                 if(!game.gameLive)
@@ -442,6 +440,7 @@ function socketImplementation(io)
             }
         })
     });
+
 }
 
 

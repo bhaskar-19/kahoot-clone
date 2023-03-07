@@ -9,12 +9,12 @@ async function signin(req, res)
     try
     {
         const {email, password} = req.body;
-
+        
         //find a user by email
         const user = await User.findOne({email});
         if(!user)
         {
-            res.status(400).send("Invalid email or password");
+            return res.status(400).send("Invalid email or password");
         }
 
         //compare password
@@ -31,12 +31,16 @@ async function signin(req, res)
             email: email
         }
         const token = jwt.sign(data, jwtKey);
-        res.send(token);
+        res.status(200).json({
+            token,
+            role: user.role,
+            id: user._id
+        });
     }
     catch (error) 
     {
         console.error(error);
-        res.status(500).json({
+        res.status(400).json({
           success: false,
           message: 'Internal server error'
         });
