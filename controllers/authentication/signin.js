@@ -28,7 +28,7 @@ async function signin(req, res)
         //Generete a jwt token for authorization
         let data = {
             time: Date(),
-            email: email
+            id: user._id
         }
         const token = jwt.sign(data, jwtKey);
         res.status(200).json({

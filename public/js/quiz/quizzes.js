@@ -10,6 +10,7 @@ $(document).ready(async()=>{
             method: 'GET',
             url: 'http://localhost:3000/quiz/quizzes/'+uid
         });
+        console.log(data);
         if(data.quizzes)
         {
             const quizzes = data.quizzes;
@@ -18,9 +19,8 @@ $(document).ready(async()=>{
             for(quiz of quizzes)
             {
                 templateString+=`<tr>
-                        <th style="vertical-align:baseline;" scope="col">${id++}</th>
                         <th style="vertical-align:baseline;" scope="col">${quiz.title}</th>
-                        <th style="vertical-align:baseline;" scope="col" class = "quiz-foot"><button onclick="" type = "button" Style="background-color: #8EE4AF;">Host</button>
+                        <th style="vertical-align:baseline;" scope="col" class = "quiz-foot"><button onclick="startGame('${quiz._id}')" type = "button" Style="background-color: #8EE4AF;">Start</button>
                         </th>
                     </tr>
                 `;
@@ -30,6 +30,13 @@ $(document).ready(async()=>{
     }
     catch(error)
     {
+        console.log(error);
         alert('Unauthorized to get your quizzes');
     }
-})
+});
+
+
+function startGame(id)
+{
+    window.location.href="../host.html?id="+id;
+}

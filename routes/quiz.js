@@ -13,9 +13,9 @@ const getAllUserQuizesCtrl = require('../controllers/quiz/getAllUserQuizes');
 routes.post('/createQuiz',auth, createQuizCtrl.createQuiz);
 routes.get('/quizzes',auth, getAllQuizesCtrl.getAllQuizes);
 routes.get('/quizzes/:creator',auth, getAllUserQuizesCtrl.getAllUserQuizes);
-routes.get('/:id',auth, getQuizByIdCtrl.getQuizById);
-routes.put('/:id',auth, updateQuizByIdCtrl.updateQuizById);
-routes.delete('/:id',auth, deleteQuizByIdCtrl.deleteQuizById);
+routes.get('/:quizId',auth, getQuizByIdCtrl.getQuizById);
+routes.put('/:quizId',auth, updateQuizByIdCtrl.updateQuizById);
+routes.delete('/:quizId',auth, deleteQuizByIdCtrl.deleteQuizById);
 routes.post('/join',auth, joinGameCtrl.joinGame);
 
 

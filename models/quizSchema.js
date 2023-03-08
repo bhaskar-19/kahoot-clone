@@ -16,9 +16,7 @@ const quizSchema = mongoose.Schema({
         ref: 'Question',
         required: true
     }],
-    gamePin:{
-        type :[String]
-    }
+    gamePin: [String]
 });
 
 const questionSchema = mongoose.Schema({
@@ -60,3 +58,4 @@ const questionModel = mongoose.model('Question', questionSchema);
 const optionModel = mongoose.model('Option', optionSchema);
 
 module.exports = {quizModel, questionModel, optionModel};
+

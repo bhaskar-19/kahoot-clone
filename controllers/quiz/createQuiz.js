@@ -47,7 +47,6 @@ async function saveQuestionsAndOptionsToDb(quiz, questions)
         quiz.questions.push(question._id);
     }
     await quiz.save();
-    return true;
 }
 
 async function createQuiz(req, res)
@@ -56,7 +55,6 @@ async function createQuiz(req, res)
     {
         const quiz = new Quiz({
                                 title: req.body.title,
-                                discription: req.body.discription,
                                 creator: req.body.creator
                             });
 

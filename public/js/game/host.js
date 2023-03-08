@@ -1,8 +1,10 @@
 var socket = io();
-var id = "6405dd652a88b7d458b94557";
+var params = new URLSearchParams(window.location.search);
 
 socket.on('connect', ()=>{
     $('#players').val = "";
+    const id = params.get('id');
+    console.log(id);
     socket.emit('host-join', id);
 });
 

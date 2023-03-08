@@ -52,11 +52,10 @@ $('#done').click(async()=>{
             },
             data: JSON.stringify(quiz),
         });
-        console.log(response);
-        if(response.status == 200)
+        if(response.success == true)
         {
             alert("Successfull quiz added");
-            localStorage.clear();
+            localStorage.removeItem('questions');
             location.reload();
         }  
     }
