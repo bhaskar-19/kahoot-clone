@@ -3,9 +3,11 @@ var params = new URLSearchParams(window.location.search);
 
 socket.on('connect', ()=>{
     $('#players').val = "";
-    const id = params.get('id');
-    console.log(id);
-    socket.emit('host-join', id);
+    const data = {
+        id: params.get('id'),
+        batch : params.get('batch')
+    };
+    socket.emit('host-join', data);
 });
 
 socket.on('showGamePin', (data)=>{

@@ -4,10 +4,10 @@ let correct = false;
 let name;
 let score = 0;
 
-const hostId = new URLSearchParams(window.location.search);
+const playerId = new URLSearchParams(window.location.search);
 
 socket.on('connect', ()=>{
-    const id = hostId.get('id');
+    const id = playerId.get('id');
     
     socket.emit('player-join-game', id);
 

@@ -53,38 +53,38 @@ socket.on('questionOver', (playerData, correctOption)=>{
     let total = 0;
     $('#playersAnswered').css('display', "none");
     $('#timerText').css('display', "none");
-
+    console.log(correctOption);
     if(correctOption == 1)
     {
-        const option = $('#option1').val;
+        const option = $('#option1').html();
         $('#option1').html("&#10004"+" "+option);
-        $('#option2').css('opacity', 0.5);
-        $('#option3').css('opacity', 0.5);
-        $('#option4').css('opacity', 0.5);
+        $('#option2').css('filter', 'opacity(0.5)');
+        $('#option3').css('filter', 'opacity(0.5)');
+        $('#option4').css('filter', 'opacity(0.5)');
     }
     else if(correctOption == 2)
     {
-        const option = $('#option2').val;
+        const option = $('#option2').html();
         $('#option2').html("&#10004"+" "+option);
-        $('#option1').css('opacity', 0.5);
-        $('#option3').css('opacity', 0.5);
-        $('#option4').css('opacity', 0.5);
+        $('#option1').css('filter', 'opacity(0.5)');
+        $('#option3').css('filter', 'opacity(0.5)');
+        $('#option4').css('filter', 'opacity(0.5)');
     }
     else if(correctOption == 3)
     {
-        const option = $('#option3').val;
+        const option = $('#option3').html();
         $('#option3').html("&#10004"+" "+option);
-        $('#option2').css('opacity', 0.5);
-        $('#option1').css('opacity', 0.5);
-        $('#option4').css('opacity', 0.5);
+        $('#option2').css('filter', 'opacity(0.5)');
+        $('#option1').css('filter', 'opacity(0.5)');
+        $('#option4').css('filter', 'opacity(0.5)');
     }
     else if(correctOption == 4)
     {
-        const option = $('#option4').val;
+        const option = $('#option4').html();
         $('#option4').html("&#10004"+" "+option);
-        $('#option2').css('opacity', 0.5);
-        $('#option3').css('opacity', 0.5);
-        $('#option1').css('opacity', 0.5);
+        $('#option2').css('filter', 'opacity(0.5)');
+        $('#option3').css('filter', 'opacity(0.5)');
+        $('#option1').css('filter', 'opacity(0.5)');
     }
 
     // Graph players choosed option
@@ -139,7 +139,7 @@ function nextQuestion()
     $('#option4').css('filter', "none");
 
     $('#playersAnswered').css('display', 'block');
-    $('#timerText').css('display', 'block');
+    $('#timerText').css('display', 'block');    
     $('#num').html(20);
 
     socket.emit('nextQuestion');

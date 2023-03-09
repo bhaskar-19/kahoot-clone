@@ -10,17 +10,17 @@ $(document).ready(async()=>{
             method: 'GET',
             url: 'http://localhost:3000/quiz/quizzes/'+uid
         });
-        console.log(data);
         if(data.quizzes)
         {
             const quizzes = data.quizzes;
             let templateString = ``;
-            let id = 1;
-            for(quiz of quizzes)
+            for(let quiz of quizzes)
             {
                 templateString+=`<tr>
                         <th style="vertical-align:baseline;" scope="col">${quiz.title}</th>
-                        <th style="vertical-align:baseline;" scope="col" class = "quiz-foot"><button onclick="startGame('${quiz._id}')" type = "button" Style="background-color: #8EE4AF;">Start</button>
+                        <th class = "col-md-3"style="vertical-align:baseline;" scope="col"><input id="${quiz.title}" class="form-control form-control-xs col-3" type="text" placeholder="Batch">
+                        </th>
+                        <th style="vertical-align:baseline;" scope="col" class = "quiz-foot"><button onclick="startGame('${quiz.title}','${quiz._id}')" type = "button" Style="background-color: #8EE4AF;">Start</button>
                         </th>
                     </tr>
                 `;
@@ -36,7 +36,14 @@ $(document).ready(async()=>{
 });
 
 
-function startGame(id)
+function startGame(title, id)
 {
-    window.location.href="../host.html?id="+id;
+    const qtitle = $('#'+title).val();
+    console.log(qtitle)
+    if(qtitle === undefined || qtitle===null)
+    {
+        alert("Please Enter Batch Name");
+        return;
+    }
+    window.location.href="../host.html?id="+id+"&batch="+qtitle;
 }

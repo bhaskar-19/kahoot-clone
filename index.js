@@ -7,6 +7,7 @@ const http = require('http');
 const authenticationRoutes = require('./routes/authentication');
 const quizRoutes = require('./routes/quiz');
 const questionRoutes = require('./routes/question');
+const gameRoutes = require('./routes/game');
 const socketImp = require('./socket/server');
 const path = require('path');
 
@@ -22,6 +23,7 @@ app.use(express.static(publicPath));
 app.use('/authentication', authenticationRoutes);
 app.use('/quiz', quizRoutes);
 app.use('/quiz/question', questionRoutes);
+app.use('/game',gameRoutes);
 
 socketImp.socketImplementation(io);
 

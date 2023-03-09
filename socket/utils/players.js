@@ -21,6 +21,14 @@ class Players {
     getPlayers(hostId){
         return this.players.filter((player) => player.hostId === hostId);
     }
+    removeAllPlayers()
+    {
+        this.players = [];
+    }
+    getAllPlayers()
+    {
+        return this.players;
+    }
 }
 
 module.exports = {Players};
