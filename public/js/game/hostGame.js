@@ -3,7 +3,7 @@ const socket = io();
 const params = new URLSearchParams(window.location.search);
 
 let timer;
-
+let qn = 1;
 let time = 20;
 
 socket.on('connect', ()=>{
@@ -14,7 +14,7 @@ socket.on('connect', ()=>{
 });
 
 socket.on('noGameFound', function(){
-    window.location.href = '../';//Redirect user to 'join game' page
+    window.location.href = './admin/createQuiz.html';
  });
 
 socket.on('gameQuestions', (questions)=>{
@@ -26,6 +26,7 @@ socket.on('gameQuestions', (questions)=>{
 
     const correctOption = questions.correctOption;
     $('#playersAnswered').html("Players Answered 0 / " + questions.playersInGame);
+    $('#questionNum').html("Question "+(qn++)+" / "+ questions.questions)
     updateTimer();
 });
 
@@ -159,6 +160,7 @@ socket.on('GameOver', (results)=>{
     $('#option4').css('display', "none");
 
     $('#playersAnswered').html('');
+    $('#questionNum').html('');
     $('#timerText').html('');
     $('#question').html("Game Over");
 
@@ -174,6 +176,8 @@ socket.on('GameOver', (results)=>{
     $('#winner3').html('3. '+results.num3);
     $('#winner4').html('4. '+results.num4);
     $('#winner5').html('5. '+results.num5);
+
+    $('#home').css('display', 'block');
 });
 
 socket.on('getTime', function(player){
@@ -182,3 +186,8 @@ socket.on('getTime', function(player){
         time: time
     });
 });
+
+function home()
+{
+    window.location.href = './admin/createQuiz.html'
+}

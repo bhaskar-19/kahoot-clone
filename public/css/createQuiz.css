@@ -94,7 +94,7 @@ body{
     border-color: var(--grey-color)!important;
     box-shadow: 0 4px 0 0 #bbbbbb!important;
 }
-.quiz-foot button{
+.quiz-foot button,#done{
     border: none;
     border-radius: 0.5rem;
     outline: 0;

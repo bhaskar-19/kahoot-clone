@@ -16,7 +16,7 @@ form.addEventListener('submit', async (event) => {
         {
             localStorage.setItem('data', data.token);
             localStorage.setItem('id', data.id);
-            window.location.href='/createQuiz.html'; 
+            window.location.href='./admin/createQuiz.html'; 
         }
         else if(data.role === 'student')
         {

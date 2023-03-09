@@ -6,6 +6,7 @@ const requireAuth = async (req, res, next) => {
     try 
     {
         const token = req.header('jwttoken');
+        console.log("hereee ", token);
         if (!token) {
             return res.status(401).json({ error: 'Unauthorized' });
         }

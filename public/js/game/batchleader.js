@@ -43,5 +43,5 @@ function leaderBoard(gameId)
 
 function home()
 {
-    window.location.href = './createQuiz.html';
+    window.location.href = './admin/createQuiz.html';
 }

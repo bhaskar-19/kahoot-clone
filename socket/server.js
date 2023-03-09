@@ -139,7 +139,8 @@ function socketImplementation(io)
                         op3: option3,
                         op4: option4,
                         correctOption: correctOption,
-                        playersInGame: playersData.length
+                        playersInGame: playersData.length,
+                        questions: questions.length
                     });
                     io.to(game.pin).emit('gameStartedPlayer');
                     game.gameData.questionLive = true;
@@ -321,7 +322,8 @@ function socketImplementation(io)
                         op3: option3,
                         op4: option4,
                         correctOption: correctOption,
-                        playersInGame: playersData.length
+                        playersInGame: playersData.length,
+                        questions: questions.length
                     });
                 }
                 else

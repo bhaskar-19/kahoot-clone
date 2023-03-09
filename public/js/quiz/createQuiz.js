@@ -1,7 +1,6 @@
 $(document).ready(()=>{ 
 
-    let oid = 1, qid = 1;
-    $('#content').html('');   
+    let oid = 1, qid = 1;   
     $('#content').append(generateTString(qid));
 
 });
@@ -78,11 +77,8 @@ const questions = [];
 let qflag = false;
 function save(qid)
 {   
-    let qt;
-    if(!qflag)
-    {
-        qt = $('#qt'+qid).val();
-    }
+    
+    const qt = $('#qtitle').val();
     const q = $('#q'+qid).val();
     const op1 = $('#op'+qid+'1').val();
     const op2 = $('#op'+qid+'2').val();
@@ -153,11 +149,7 @@ function generateTString(qid)
 {
     let oid = 1;
     const templateString = `<div id="wrapper${qid}"class = "wrapper mb-3">
-    <div class = "quiz-container">
-        <div class = "quiz-head">
-            <h1 class = "quiz-title">Create Quiz Game</h1>
-            ${(flag===false)?`<input id="qt${qid}" class="qtitle form-control form-control-lg mb-3 ml-5" type="text" placeholder="title" style="width:400px">`:``}
-        </div>
+    <div class = "quiz-container">  
         <div class = "quiz-body">
             <input id="q${qid}" class="form-control form-control-lg ml-5" type="text" placeholder="Start typing your question">
             <ul class = "quiz-options">   

@@ -7,6 +7,7 @@ socket.on('connect', ()=>{
         id: params.get('id'),
         batch : params.get('batch')
     };
+    console.log(data.batch);
     socket.emit('host-join', data);
 });
 
@@ -15,7 +16,7 @@ socket.on('showGamePin', (data)=>{
 });
 
 socket.on('noGameFound', ()=>{
-    window.location.href = '../';
+    window.location.href = './admin/createQuiz.html';
 });
 
 socket.on('updatePlayerLobby', (players)=>{
@@ -34,7 +35,7 @@ function startGame(){
 }
 
 function endGame(){
-    window.location.href = "/";
+    window.location.href = "./admin/createQuiz.html";
 }
 
 socket.on('gameStarted', (hostId)=>{
