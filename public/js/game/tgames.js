@@ -50,5 +50,6 @@ function leaderBoard(quizId)
 function signOut()
 {
     localStorage.clear();
+    $.removeCookie('userData', {path:'/'});
     window.location.href = '/';
 }

@@ -54,5 +54,6 @@ function startGame(title, id)
 function signOut()
 {
     localStorage.clear();
+    $.removeCookie('userData', {expires: new Date(0)});
     window.location.href = '/';
 }

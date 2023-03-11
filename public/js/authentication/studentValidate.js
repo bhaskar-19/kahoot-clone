@@ -18,7 +18,6 @@ async function validate()
         console.log(data);
         if(data.success && data.role === 'student')
         {
-            console.log("Hereereeere")
             $(".loaderDiv").remove();
             $("body").css("position",'');
             $("body").css("height",'');
@@ -45,5 +44,6 @@ validate()
 function signOut()
 {
     localStorage.clear();
+    $.removeCookie('userData', { path: '/'});
     window.location.href = '/';
 }

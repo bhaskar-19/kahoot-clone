@@ -93,7 +93,6 @@ async function updateTeacher(req, res)
     try
     {
         const id = req.body.id;
-        console.log(id);
         const user = await User.findById(id);
         if(!user)
         {
