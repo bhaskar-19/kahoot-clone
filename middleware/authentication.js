@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userSchema').userModel;
 const Quiz = require('../models/quizSchema').quizModel;
+const GoogleUser = require('../models/googleUsersSchema').GoogleUser;
 
 const requireAuth = async (req, res, next) => {
     try 
@@ -12,7 +13,8 @@ const requireAuth = async (req, res, next) => {
         }
         const decodedToken = jwt.verify(token, process.env.JWTSECRETEKEY);
         const user = await User.findById(decodedToken.id);
-        if (!user) {
+        const googleUser = await GoogleUser.findById(decodedToken.id);
+        if (!user && !googleUser) {
             return res.status(400).json({ error: 'Unauthorized' });
         }
 
@@ -26,8 +28,9 @@ const requireAuth = async (req, res, next) => {
         }
         next();
     } 
-    catch(err) 
+    catch(error) 
     {
+        console.log(error)
         return res.status(401).json({ error: 'Unauthorized' });
     }
 };

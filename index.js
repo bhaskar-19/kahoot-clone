@@ -3,6 +3,7 @@ require('dotenv').config({path:'.env'});
 const bodyParser = require('body-parser');
 const socketIo = require('socket.io');
 const http = require('http');
+const cors = require('cors');
 
 const authenticationRoutes = require('./routes/authentication');
 const quizRoutes = require('./routes/quiz');
@@ -16,6 +17,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(bodyParser.json());
+app.use(cors());
 
 const publicPath = path.join(__dirname, './public');
 app.use(express.static(publicPath));

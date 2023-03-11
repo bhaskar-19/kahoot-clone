@@ -61,7 +61,7 @@ async function updateQuizById(req, res)
 
         if(!quiz.creator.equals(userId))
         {
-            return res.status(403).json({ 
+            return res.status(400).json({ 
                         success:false,
                         message: 'Not authorized to update this quiz' 
                     });
@@ -86,7 +86,7 @@ async function updateQuizById(req, res)
             });
         })
         .catch((error)=>{
-            res.status(300).json({
+            res.status(400).json({
                 success: false,
                 message: error
             })
@@ -95,7 +95,7 @@ async function updateQuizById(req, res)
     catch(error)
     {
         console.error(error);
-        res.status(500).json({
+        res.status(400).json({
           success: false,
           message: 'Internal server error'
         });

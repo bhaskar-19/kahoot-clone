@@ -40,3 +40,18 @@ form.addEventListener('submit', async (event) => {
     }
   }
 });
+
+$(document).ready(()=>{
+
+
+    $('#google').click(async ()=>{
+        try
+        {
+            window.location.href = 'http://localhost:3000/authentication/login';
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
+    })
+})
