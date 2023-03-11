@@ -184,6 +184,6 @@ function generateTString(qid)
 function signOut()
 {
     localStorage.clear();
-    $.removeCookie('userData', {expires: new Date(0)});
+    $.removeCookie('userData', {path: '/'});
     window.location.href = '/';
 }

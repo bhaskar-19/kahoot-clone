@@ -15,8 +15,7 @@ const quizSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Question',
         required: true
-    }],
-    gamePin: [String]
+    }]
 });
 
 const questionSchema = mongoose.Schema({

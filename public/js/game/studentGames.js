@@ -51,5 +51,6 @@ function leaderBoard(batchId)
 function signOut()
 {
     localStorage.clear();
+    $.removeCookie('userData', { path: '/' });
     window.location.href = '/';
 }

@@ -54,6 +54,6 @@ function startGame(title, id)
 function signOut()
 {
     localStorage.clear();
-    $.removeCookie('userData', {expires: new Date(0)});
+    $.removeCookie('userData', {path: '/'});
     window.location.href = '/';
 }
