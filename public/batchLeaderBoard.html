@@ -10,8 +10,24 @@
    <script src="https://kit.fontawesome.com/3e2d508ba6.js" crossorigin="anonymous"></script>
    <link href="./css/createQuiz.css" rel="stylesheet">
    <title>QUIZZES | BrainBuzz</title>
+   <style>
+    .loaderDiv
+    {   position: fixed;
+        height: 100vh ;
+        width: 100vw ;
+        z-index: 1000;
+        background-color:white;
+    }
+ </style>
 </head>
 <body>
+
+  <div class="loaderDiv d-flex flex-column align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="height: 5rem;width: 5rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
    <nav class="navbar navbar-expand-lg navbar-dark shadow-lg" style="background-color: #242582;">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">TEACHER ADMIN</a>
@@ -47,6 +63,7 @@
               </div>
             </div>
           </div>
-  <script src="./js/game/batchleader.js"></script>
+          <script src="./js/authentication/validate.js"></script>
+          <script src="./js/game/batchleader.js"></script>
 </body>
 </html>

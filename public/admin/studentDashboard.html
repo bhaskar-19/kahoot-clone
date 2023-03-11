@@ -9,13 +9,15 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <link href="../css/createQuiz.css" rel="stylesheet">
   <!-- Favicons -->
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/brand.min.css">
   <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/flag.min.css">
-  <!-- Google Fonts -->
+  <!-- Google Fonts --><div id = "content" class="col py-3">
+          
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <script src="https://kit.fontawesome.com/3e2d508ba6.js" crossorigin="anonymous"></script>
@@ -28,7 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="../css/preloader.css" rel="stylesheet">
   <style>
     .loaderDiv
     {   position: fixed;
@@ -36,11 +38,10 @@
         width: 100vw ;
         z-index: 1000;
         background-color:white;
+
     }
     
   </style>
-
- 
 </head>
 
 <body>
@@ -98,32 +99,25 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/admin/createQuiz.html">
+        <a class="nav-link collapsed" href="/admin/studentDashboard.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="createQuiz.html">
+        <a class="nav-link " href="studentDashboard.html">
           <i class="fa-solid fa-plus"></i>
-          <span>Create Quiz</span>
+          <span>Join Game</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="game.html">
+        <a class="nav-link collapsed" href="/studentGames.html">
           <i class="fa-solid fa-puzzle-piece"></i>
           <span>Games</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="quizzes.html">
-          <i class="fa-solid fa-clipboard-question"></i>
-          <span>Quizzes</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
 
     </ul>
 
@@ -132,44 +126,41 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Games</h1>
+      <h1>Join Game</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="createQuiz.html">Home</a></li>
-          <li class="breadcrumb-item active">Games</li>
+          <li class="breadcrumb-item"><a href="/admin/studentDashboard.html">Home</a></li>
+          <li class="breadcrumb-item active">Join Game</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-        <div class="row">
-            <div id = "content" class="col py-3">
-                <div class = "wrapper">
-                    <div class = "quiz-container">
-                      <table class="table text-center">
-                        <thead>
-                          <tr>
-                            <th scope="col">Game</th>
-                            <th scope="col">Date and Time</th>
-                            <th scope="col">Played</th>
-                            <th scope="col">Leaderboard</th>
-                          </tr>
-                        </thead>
-                        <tbody id="tbody">
-      
-                        </tbody>
-                      </table>
-                    </div>
-                </div>
-            </div>     
+      <div class="row">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+            <img src="https://t4.ftcdn.net/jpg/01/86/62/13/360_F_186621343_Jc2hmJwatIcWhf9wjJfNakQQNefoZLCi.jpg"
+              class="img-fluid" alt="Phone image" width="600px" height="600px">
         </div>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <h3>Click here to join a Game</h3>
+            <br>
+            <form action="/player.html">
+              
+              <div class="form-field">
+                  <label id = "label">Game Pin</label>
+                  <input class="form-control form-control-lg" id = "pin" type="number" name="pin"/>
+              </div>
+              <br>
+              <div class="form-field">
+                  <button id = "joinButton" type="submit" class="btn btn-primary btn-lg btn-block">Join</button>
+              </div>
+           </form>
+            
+          </div>   
+      </div>
     </section>
 
   </main><!-- End #main -->
-
-  <script src="../js/game/tgames.js"></script>
-
-  <script src="../js/authentication/validate.js"></script>
 
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -177,7 +168,7 @@
   
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script src="../js/authentication/studentValidate.js"></script>
 </body>
 
 </html>

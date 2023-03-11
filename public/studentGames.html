@@ -22,12 +22,12 @@
 
   <!-- Vendor CSS Files -->
   
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="admin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="admin/assets/css/style.css" rel="stylesheet">
 
   <style>
     .loaderDiv
@@ -97,36 +97,28 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/admin/createQuiz.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="createQuiz.html">
-          <i class="fa-solid fa-plus"></i>
-          <span>Create Quiz</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link " href="game.html">
-          <i class="fa-solid fa-puzzle-piece"></i>
-          <span>Games</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="quizzes.html">
-          <i class="fa-solid fa-clipboard-question"></i>
-          <span>Quizzes</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/admin/studentDashboard.html">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/admin/studentDashboard.html">
+            <i class="fa-solid fa-plus"></i>
+            <span>Join Game</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link " href="studentGames.html">
+            <i class="fa-solid fa-puzzle-piece"></i>
+            <span>Games</span>
+          </a>
+        </li><!-- End F.A.Q Page Nav -->
+  
     </ul>
-
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
@@ -135,7 +127,7 @@
       <h1>Games</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="createQuiz.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/admin/studentDashboard.html">Home</a></li>
           <li class="breadcrumb-item active">Games</li>
         </ol>
       </nav>
@@ -150,8 +142,8 @@
                         <thead>
                           <tr>
                             <th scope="col">Game</th>
-                            <th scope="col">Date and Time</th>
-                            <th scope="col">Played</th>
+                            <th scope="col">Batch</th>
+                            <th scope="col">Score</th>
                             <th scope="col">Leaderboard</th>
                           </tr>
                         </thead>
@@ -167,16 +159,15 @@
 
   </main><!-- End #main -->
 
-  <script src="../js/game/tgames.js"></script>
+  <script src="./js/game/studentGames.js"></script>
 
-  <script src="../js/authentication/validate.js"></script>
+  <script src="./js/authentication/studentValidate.js"></script>
 
 
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
+  <script src="admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="admin/assets/js/main.js"></script>
 
 </body>
 

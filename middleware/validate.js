@@ -16,7 +16,10 @@ const validate = async (req, res, next) => {
         }
 
         
-        res.send(true);
+        res.status(200).json({
+            success: true,
+            role: user.role
+        });
     } 
     catch(err) 
     {

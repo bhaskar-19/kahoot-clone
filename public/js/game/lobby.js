@@ -5,17 +5,18 @@ socket.on('connect', ()=>{
     //console.log(params.get('pin'));
     const formData = {
         pin: params.get('pin'),
-        name: params.get('name')
+        name: localStorage.getItem('name'),
+        id: localStorage.getItem('id')
     }
     socket.emit('player-join', formData);
 });
 
 socket.on('noGameFound', function(){
-    window.location.href = '../';
+    window.location.href = '/admin/studentDashboard.html';
 });
 
 socket.on('hostDisconnect', function(){
-    window.location.href = '../';
+    window.location.href = '/admin/studentDashboard.html';
 });
 
 socket.on('gameStartedPlayer', function(){

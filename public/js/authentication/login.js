@@ -16,13 +16,15 @@ form.addEventListener('submit', async (event) => {
         {
             localStorage.setItem('data', data.token);
             localStorage.setItem('id', data.id);
+            localStorage.setItem('name', data.name);
             window.location.href='./admin/createQuiz.html'; 
         }
         else if(data.role === 'student')
         {
             localStorage.setItem('data', data.token);
             localStorage.setItem('id', data.id);
-            window.location.href='../';
+            localStorage.setItem('name', data.name);
+            window.location.href='/admin/studentDashboard.html';
         }
   }
   catch(error)

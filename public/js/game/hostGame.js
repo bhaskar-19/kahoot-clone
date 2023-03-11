@@ -3,6 +3,7 @@ const socket = io();
 const params = new URLSearchParams(window.location.search);
 
 let timer;
+let timerId;
 let qn = 1;
 let time = 20;
 
@@ -111,6 +112,8 @@ socket.on('questionOver', (playerData, correctOption)=>{
     option2 = option2 / total * 100;
     option3 = option3 / total * 100;
     option4 = option4 / total * 100;
+    
+   
 
     $('#square1').css('display', "inline-block");
     $('#square2').css('display', "inline-block");

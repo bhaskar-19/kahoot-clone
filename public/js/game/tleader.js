@@ -41,3 +41,8 @@ function leaderBoard(quizId,gameId)
 {
     window.location.href='../batchLeaderBoard.html?quizId='+quizId+'&gameId='+gameId;
 }
+
+function home()
+{
+    window.location.href = '/admin/createQuiz.html';
+}

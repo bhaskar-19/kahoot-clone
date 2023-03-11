@@ -18,10 +18,6 @@ class LiveGames {
     getGame(hostId){
         return this.games.filter((game) => game.hostId === hostId)[0]
     }
-    removeAllGames()
-    {
-        this.games = [];
-    }
     getGames()
     {
         return this.games;

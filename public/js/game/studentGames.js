@@ -4,21 +4,22 @@ $(document).ready(async()=>{
     {
         const games = await $.ajax({
             method: 'GET',
-            url: 'http://localhost:3000/game/'+localStorage.getItem('id'),
+            url: 'http://localhost:3000/game/playerGames/'+localStorage.getItem('id'),
             headers: {
                 "jwttoken": localStorage.getItem('data')
             }
         });
-        if(games)
+        
+        if(games.success)
         {
             let templateString = ``;
-            for(let game of games)
+            for(let game of games.games)
             {
                 templateString+=`<tr>
-                        <th style="vertical-align:baseline;" scope="col">${game.quiz.title}</th>
-                        <th style="vertical-align:baseline;" scope="col">${game.createdAt}</th>
-                        <th style="vertical-align:baseline;" scope="col">${game.len}</th>
-                        <th style="vertical-align:baseline;" scope="col" class = "quiz-foot"><button onclick="leaderBoard('${game.quiz._id}')" type = "button" Style="background-color: #8EE4AF;">></button>
+                        <th style="vertical-align:baseline;" scope="col">${game.quiz}</th>
+                        <th style="vertical-align:baseline;" scope="col">${game.batch}</th>
+                        <th style="vertical-align:baseline;" scope="col">${game.score}</th>
+                        <th style="vertical-align:baseline;" scope="col" class = "quiz-foot"><button onclick="leaderBoard('${game.batchId}')" type = "button" Style="background-color: #8EE4AF;">></button>
                         </th>
                     </tr>
                 `;
@@ -41,9 +42,9 @@ $(document).ready(async()=>{
 
 });
 
-function leaderBoard(quizId)
+function leaderBoard(batchId)
 {
-    window.location.href = '../tLeaderBoard.html?id='+quizId;
+    window.location.href = '../studentLeaderBoard.html?id='+batchId;
 }
 
 

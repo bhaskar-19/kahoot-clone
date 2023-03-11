@@ -18,7 +18,7 @@ socket.on('connect', ()=>{
 });
 
 socket.on('noGameFound', function(){
-    window.location.href = '../abc.html';//Redirect user to 'join game' page 
+    window.location.href = '/admin/studentDashboard.html';//Redirect user to 'join game' page 
 });
 
 function answerSubmitted(option)
@@ -101,5 +101,5 @@ socket.on('GameOver', ()=>{
 });
 
 socket.on('hostDisconnected', function(){
-    window.location.href = "../";
+    window.location.href = "/admin/studentDashboard.html";
 });

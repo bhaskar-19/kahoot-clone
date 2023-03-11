@@ -32,14 +32,7 @@ function socketImplementation(io)
                 }
                 userId = quiz.creator;
                 const gamePin = Math.floor(Math.random() * 90000) + 10000+'';
-                if(games.getGames().length > 0)
-                {
-                    games.removeAllGames();
-                }
-                if(players.getAllPlayers().length > 0)
-                {
-                    players.removeAllPlayers();
-                }
+                
                 games.addGame(gamePin, socket.id, false, {playersAnswered: 0, questionLive: false, gameId: data.id, question: 1});
     
                 const game = games.getGame(socket.id);
@@ -68,7 +61,7 @@ function socketImplementation(io)
 
                         const hostId = games.games[i].hostId;
 
-                        players.addPlayer(hostId, socket.id, formData.name, {score: 0, answer: 0});
+                        players.addPlayer(hostId, socket.id, formData.name,formData.id, {score: 0, answer: 0});
 
                         socket.join(formData.pin);
 
@@ -114,7 +107,7 @@ function socketImplementation(io)
                         }
                     }
 
-                    const gameId = game.gameData.gameId;
+                    const gameId = game.gameData.gameId;//geting quizId
                     
                     const questions = await Question.find({quiz:gameId}).populate({
                                                                             path: 'options',
@@ -420,18 +413,19 @@ function socketImplementation(io)
                         num4: fourth.name,
                         num5: fifth.name
                     });
-                    console.log(games.games);
-                    const gamesData = games.games[0];
-                    const playersclassData = players.players;
-                    const DBgame = await Games.findOne({quiz: games.games[0].gameData.gameId});
+
+                    console.log(game);
+                
+                    const DBgame = await Games.findOne({quiz: game.gameData.gameId});
                     if(!DBgame)
                     {
                     
 
                         const playersData = [];
-                        for(let player of playersclassData)
+                        for(let player of playersInGame)
                         {
                             const obj = {
+                                playerId : player.id,
                                 name : player.name,
                                 score: player.gameData.score
                             }
@@ -440,26 +434,25 @@ function socketImplementation(io)
                         console.log()
                         const gameData =  Games({
                             
-                            quiz: gamesData.gameData.gameId,
+                            quiz: game.gameData.gameId,
                             games: [{
                                 batch: batch,
-                                pin : gamesData.pin,
+                                pin : game.pin,
                                 players: playersData
                             }],
                             host: userId    
                         });
-                        console.log("Hereeee");
-                        console.log(gameData);
                         const dbGame = await gameData.save();
-                        console.log(dbGame);
+                        
                     }
                     else
                     {
                         const dbGames = DBgame.games;
                         const playersData = [];
-                        for(let player of playersclassData)
+                        for(let player of playersInGame)
                         {
                             const obj = {
+                                playerId : player.id,
                                 name : player.name,
                                 score: player.gameData.score
                             }
@@ -467,13 +460,20 @@ function socketImplementation(io)
                         }
                         dbGames.push({
                             batch: batch,
-                            pin: gamesData.pin,
+                            pin: game.pin,
                             players: playersData
                         });
                         const dbGame = await DBgame.save();
                     }
-                    games.removeAllGames();
-                    players.removeAllPlayers();
+                    games.removeGame(socket.id);
+                    console.log('Game ended with pin: ', game.pin);
+
+
+                    for(let i=0; i<playersInGame.length; i++)
+                    {
+                        players.removePlayer(playersInGame[i].playerId);
+                    }
+
                 }
                 if(!flag)
                 {
@@ -526,7 +526,7 @@ function socketImplementation(io)
                     }
                 }
             }
-        })
+        });
     });
 
 }

@@ -34,7 +34,8 @@ async function signin(req, res)
         res.status(200).json({
             token,
             role: user.role,
-            id: user._id
+            id: user._id,
+            name: user.firstName
         });
     }
     catch (error) 

@@ -1,4 +1,5 @@
 $(document).ready(async()=>{
+    $('.username').html(localStorage.getItem('name'));
     try
     {
         const uid = localStorage.getItem('id');
@@ -38,7 +39,8 @@ $(document).ready(async()=>{
 
 function startGame(title, id)
 {
-    const qtitle = $('#'+title).val();
+    let qtitle = $('#'+title).val();
+    qtitle = qtitle.replace(/\s+/g, '');
     console.log(qtitle)
     if(qtitle === undefined || qtitle===null)
     {
@@ -46,4 +48,11 @@ function startGame(title, id)
         return;
     }
     window.location.href="../host.html?id="+id+"&batch="+qtitle;
+}
+
+
+function signOut()
+{
+    localStorage.clear();
+    window.location.href = '/';
 }

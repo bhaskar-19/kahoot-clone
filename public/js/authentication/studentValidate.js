@@ -1,3 +1,8 @@
+$(document).ready(()=>{
+    console.log(localStorage.getItem('name'));
+    $('.username').html(localStorage.getItem('name'));
+})
+
 async function validate()
 {
     try
@@ -11,7 +16,7 @@ async function validate()
             url: 'http://localhost:3000/authentication/validate'
         });
         console.log(data);
-        if(data.success && data.role === 'teacher')
+        if(data.success && data.role === 'student')
         {
             console.log("Hereereeere")
             $(".loaderDiv").remove();
@@ -36,3 +41,9 @@ async function validate()
     }
 }
 validate()
+
+function signOut()
+{
+    localStorage.clear();
+    window.location.href = '/';
+}

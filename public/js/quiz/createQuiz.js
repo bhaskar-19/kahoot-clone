@@ -2,7 +2,7 @@ $(document).ready(()=>{
 
     let oid = 1, qid = 1;   
     $('#content').append(generateTString(qid));
-
+    $('.username').html(localStorage.getItem('name'));
 });
 
 
@@ -179,4 +179,10 @@ function generateTString(qid)
   </div>`;
   flag=true;
   return templateString;
+}
+
+function signOut()
+{
+    localStorage.clear();
+    window.location.href = '/';
 }
