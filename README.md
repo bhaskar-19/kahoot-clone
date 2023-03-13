@@ -443,4 +443,8 @@ Pull this docker repository into your ec2 instance
 ```bash
     sudo docker pull dockerRepoName
 ```
+Run following cmd to run your project
 
+```bash
+  sudo docker run -p 80:3000 -t dockerRepoName
+```
