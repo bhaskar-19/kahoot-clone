@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Game | BrainBuzz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <link rel = "stylesheet" href = "./css/playerGameView.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +14,14 @@
             <h4 id = "scoreText">Score: </h4>
             <h4 id = "rankText"></h4>
         </div>
+        <h2 id = "question">Question</h2>     
         <h2 id = "message"></h2>
-        <button onclick = "answerSubmitted(1)" id = "option1" class = "button"></button>
-        <button onclick = "answerSubmitted(2)" id = "option2" class = "button"></button>
+        <button onclick = "answerSubmitted(1)" id = "option1" class = "button"><h3 id = "opt1">Option</h3></button>
+        <button onclick = "answerSubmitted(2)" id = "option2" class = "button"><h3 id = "opt2">Option</h3></button>
         <br>
-        <button onclick = "answerSubmitted(3)" id = "option3" class = "button"></button>
-        <button onclick = "answerSubmitted(4)" id = "option4" class = "button"></button>
+        <button onclick = "answerSubmitted(3)" id = "option3" class = "button"><h3 id = "opt3">Option</h3></button>
+        <button onclick = "answerSubmitted(4)" id = "option4" class = "button"><h3 id = "opt4">Option</h3></button>
+        <button id="home" onclick="home()" type = "button">Back to Home</button>
         <script src = "../../socket.io/socket.io.js"></script>
         <script src = "./js/game/playerGame.js"></script>
     </body>

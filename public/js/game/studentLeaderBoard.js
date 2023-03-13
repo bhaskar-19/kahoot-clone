@@ -7,7 +7,7 @@ $(document).ready(async ()=>{
         const jwttoken = localStorage.getItem('data');
         const batchData = await $.ajax({
             method: 'GET',
-            url: 'http://localhost:3000/game/batchBoard/'+batchId,
+            url: 'http://18.222.118.35:80/game/batchBoard/'+batchId,
             headers: {
                 "jwttoken": jwttoken
             }

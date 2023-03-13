@@ -4,7 +4,7 @@ $(document).ready(async()=>{
     {
         const games = await $.ajax({
             method: 'GET',
-            url: 'http://localhost:3000/game/'+localStorage.getItem('id'),
+            url: 'http://18.222.118.35:80/game/'+localStorage.getItem('id'),
             headers: {
                 "jwttoken": localStorage.getItem('data')
             }

@@ -7,7 +7,7 @@ socket.on('connect', ()=>{
         id: params.get('id'),
         batch : params.get('batch')
     };
-    console.log(data.batch);
+   
     socket.emit('host-join', data);
 });
 

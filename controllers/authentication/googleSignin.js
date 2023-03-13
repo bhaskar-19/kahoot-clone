@@ -12,7 +12,7 @@ const jwtKey = process.env.JWTSECRETEKEY;
 const oauth2Client = new google.auth.OAuth2(
     clientID,
     clientSecret,
-    "http://localhost:3000/authentication/auth/google/callback"
+    "http://18.222.118.35:80/authentication/auth/google/callback"
 );
 
 const scopes = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"];

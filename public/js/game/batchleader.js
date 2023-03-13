@@ -7,7 +7,7 @@ $(document).ready(async ()=>{
         const jwttoken = localStorage.getItem('data');
         const gameData = await $.ajax({
             method: 'GET',
-            url: 'http://localhost:3000/game/players/'+quizId+'/'+gameId,
+            url: 'http://18.222.118.35:80/game/players/'+quizId+'/'+gameId,
             headers: {
                 "jwttoken": jwttoken
             }

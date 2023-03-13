@@ -9,7 +9,7 @@ form.addEventListener('submit', async (event) => {
         const data = await $.ajax({
             method:'POST',
             data : JSON.stringify(formDataObj),
-            url: 'http://localhost:3000/authentication/signin',
+            url: 'http://18.222.118.35/authentication/signin',
             contentType: 'application/json'
         });
         if(data.role==='teacher')
@@ -32,7 +32,7 @@ form.addEventListener('submit', async (event) => {
     if (error.status === 400) 
     {
         const templateString = `<p class="text-center fw-bold mx-3 mb-0" style="color: red">${error.responseText} </p>`
-        $(".message").append(templateString);
+        $(".message").html(templateString);
     } 
     else 
     {
@@ -47,7 +47,7 @@ $(document).ready(()=>{
     $('#google').click(async ()=>{
         try
         {
-            window.location.href = 'http://localhost:3000/authentication/login';
+            window.location.href = 'http://18.222.118.35:80/authentication/login';
         }
         catch(error)
         {

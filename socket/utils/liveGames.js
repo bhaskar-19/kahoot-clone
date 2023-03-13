@@ -2,8 +2,8 @@ class LiveGames {
     constructor () {
         this.games = [];
     }
-    addGame(pin, hostId, gameLive, gameData){
-        const game = {pin, hostId, gameLive, gameData};
+    addGame(pin, hostId,batch, gameLive, gameData){
+        const game = {pin, hostId,batch, gameLive, gameData};
         this.games.push(game);
         return game;
     }

@@ -8,7 +8,7 @@ async function validate()
                 "jwttoken": token
             },
             method: 'GET',
-            url: 'http://localhost:3000/authentication/validate'
+            url: 'http://18.222.118.35:80/authentication/validate'
         });
         console.log(data);
         if(data.success && data.role === 'teacher')

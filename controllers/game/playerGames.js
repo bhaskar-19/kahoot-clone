@@ -13,7 +13,7 @@ async function playerGames(req, res)
             {$unwind: '$games'},
             {$unwind: '$games.players'},
             {
-                $match: {'games.players.playerId': mongoose.Types.ObjectId(playerId)}
+                $match: {'games.players.playerId': new mongoose.Types.ObjectId(playerId)}
             },
             {
                 $lookup: {

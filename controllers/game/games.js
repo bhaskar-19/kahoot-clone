@@ -58,7 +58,7 @@ async function gamePlayersData(req, res) {
         const gameData = await Games.aggregate([
             {
                 $match: {
-                    quiz: mongoose.Types.ObjectId(quizId)
+                    quiz: new mongoose.Types.ObjectId(quizId)
                 }
             },
             {
@@ -66,7 +66,7 @@ async function gamePlayersData(req, res) {
             },
             {
                 $match:{
-                    'games._id' : mongoose.Types.ObjectId(gameId)   
+                    'games._id' : new mongoose.Types.ObjectId(gameId)   
                 }
             },
             {

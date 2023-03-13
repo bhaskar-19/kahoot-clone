@@ -16,7 +16,7 @@ async function batchLeaderBoard(req, res)
             },
             {
                 $match: {
-                    'games._id' : mongoose.Types.ObjectId(batchId)
+                    'games._id' : new mongoose.Types.ObjectId(batchId)
                 }
             },
             {

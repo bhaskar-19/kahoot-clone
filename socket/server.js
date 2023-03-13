@@ -1,15 +1,12 @@
 const Quiz = require('../models/quizSchema').quizModel;
 const Question = require('../models/quizSchema').questionModel;
 const Games = require('../models/gameSchema').Game;
-const e = require('cors');
-const { Game } = require('../models/gameSchema');
 const {LiveGames} = require('./utils/liveGames');
 const {Players} = require('./utils/players');
 
 const games = new LiveGames();
 const players = new Players();
-let userId;
-let batch;
+
 
 function socketImplementation(io)
 {
@@ -18,7 +15,7 @@ function socketImplementation(io)
         socket.on('host-join', async(data)=>{
             try
             {
-                batch = data.batch;
+               
                 const quiz = await Quiz.findById(data.id).populate({
                     path: 'questions',
                     populate: {
@@ -30,10 +27,10 @@ function socketImplementation(io)
                 {
                     socket.emit('noGameFound');
                 }
-                userId = quiz.creator;
+    
                 const gamePin = Math.floor(Math.random() * 90000) + 10000+'';
                 
-                games.addGame(gamePin, socket.id, false, {playersAnswered: 0, questionLive: false, gameId: data.id, question: 1});
+                games.addGame(gamePin, socket.id,data.batch, false, {playersAnswered: 0, questionLive: false, gameId: data.id, question: 1});
     
                 const game = games.getGame(socket.id);
     
@@ -117,20 +114,20 @@ function socketImplementation(io)
                     {
                         socket.emit('noGameFound');
                     }
-
-                    const question = questions[0].title;
-                    const option1 = questions[0].options[0].title;
-                    const option2 = questions[0].options[1].title;
-                    const option3 = questions[0].options[2].title;
-                    const option4 = questions[0].options[3].title;
+                    
+                    const  pquestion = questions[0].title;
+                    const  poption1 = questions[0].options[0].title;
+                    const  poption2 = questions[0].options[1].title;
+                    const  poption3 = questions[0].options[2].title;
+                    const  poption4 = questions[0].options[3].title;
                     const correctOption = questions[0].correctOption;
 
                     socket.emit('gameQuestions', {
-                        q1: question,
-                        op1: option1,
-                        op2: option2,
-                        op3: option3,
-                        op4: option4,
+                        q1: pquestion,
+                        op1: poption1,
+                        op2: poption2,
+                        op3: poption3,
+                        op4: poption4,
                         correctOption: correctOption,
                         playersInGame: playersData.length,
                         questions: questions.length
@@ -145,21 +142,51 @@ function socketImplementation(io)
             }
         });
 
-        socket.on('player-join-game', (playerId)=>{
-            const player = players.getPlayer(playerId);
-
-            if(player)
+        socket.on('player-join-game', async (playerId)=>{
+            try
             {
-                const game = games.getGame(player.hostId);
-                socket.join(game.pin);
-                player.playerId = socket.id;
+                const player = players.getPlayer(playerId);
 
-                const playerData = players.getPlayers(game.hostId);
-                socket.emit('playerGameData', playerData);
+                if(player)
+                {
+                    const game = games.getGame(player.hostId);
+                    socket.join(game.pin);
+                    player.playerId = socket.id;
+
+                    const playerData = players.getPlayers(game.hostId);
+                    socket.emit('playerGameData', playerData);
+                    const gameId = game.gameData.gameId;//geting quizId
+                        
+                    const questions = await Question.find({quiz:gameId}).populate({
+                                                                            path: 'options',
+                                                                            select: 'title'
+                                                                        });
+                    if(!questions)
+                    {
+                        socket.emit('noGameFound');
+                    }
+
+                    const  pquestion = questions[0].title;
+                    const  poption1 = questions[0].options[0].title;
+                    const  poption2 = questions[0].options[1].title;
+                    const  poption3 = questions[0].options[2].title;
+                    const  poption4 = questions[0].options[3].title;
+                    socket.emit('gameQuestions', {
+                        q1: pquestion,
+                        op1: poption1,
+                        op2: poption2,
+                        op3: poption3,
+                        op4: poption4,   
+                    });
+                }
+                else
+                {
+                    socket.emit('noGameFound');
+                }
             }
-            else
+            catch(error)
             {
-                socket.emit('noGameFound');
+                console.log(error);
             }
         });
 
@@ -288,7 +315,11 @@ function socketImplementation(io)
                 const questions = await Question.find({quiz: gameId}).populate({
                                                                 path: 'options',
                                                                 select: 'title'
+                                                            }).populate({
+                                                                path: 'quiz',
+                                                                select: 'creator'
                                                             });
+                                                            
                 
                 if(!questions)
                 {
@@ -308,7 +339,7 @@ function socketImplementation(io)
                     const option4 = questions[questionNum].options[3].title;
                     const correctOption = questions[0].correctOption;
 
-                    socket.emit('gameQuestions', {
+                    io.to(game.pin).emit('gameQuestions', {
                         q1: question,
                         op1: option1,
                         op2: option2,
@@ -414,7 +445,7 @@ function socketImplementation(io)
                         num5: fifth.name
                     });
 
-                    console.log(game);
+                   
                 
                     const DBgame = await Games.findOne({quiz: game.gameData.gameId});
                     if(!DBgame)
@@ -431,16 +462,16 @@ function socketImplementation(io)
                             }
                             playersData.push(obj);
                         }
-                        console.log()
+                        
                         const gameData =  Games({
                             
                             quiz: game.gameData.gameId,
                             games: [{
-                                batch: batch,
+                                batch: game.batch,
                                 pin : game.pin,
                                 players: playersData
                             }],
-                            host: userId    
+                            host: questions[0].quiz.creator    
                         });
                         const dbGame = await gameData.save();
                         
@@ -459,7 +490,7 @@ function socketImplementation(io)
                             playersData.push(obj);
                         }
                         dbGames.push({
-                            batch: batch,
+                            batch: game.batch,
                             pin: game.pin,
                             players: playersData
                         });

@@ -23,7 +23,7 @@ form.addEventListener('submit',  (event) => {
   $.ajax({
     method:'POST',
     data : JSON.stringify(formDataObj),
-    url: 'http://localhost:3000/authentication/signup',
+    url: 'http://18.222.118.35:80/authentication/signup',
     contentType: 'application/json',
     success:(data)=>
     {

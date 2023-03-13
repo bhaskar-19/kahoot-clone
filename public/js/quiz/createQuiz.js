@@ -9,7 +9,14 @@ $(document).ready(()=>{
 $('#done').click(async()=>{
     try
     {
+
         const questions = JSON.parse(localStorage.getItem('questions'));
+        if(!questions)
+        {
+            alert("Please select atleast one question..!");
+            return;
+        }
+        $('#spinner').css('display', 'block');
         const questionsObj = [];
         for(let question of questions)
         {
@@ -44,7 +51,7 @@ $('#done').click(async()=>{
 
         const response = await $.ajax({
             method:'POST',
-            url: 'http://localhost:3000/quiz/createQuiz',
+            url: 'http://18.222.118.35:80/quiz/createQuiz',
             contentType:'application/json',
             headers: {
                 "jwttoken": localStorage.getItem('data')
@@ -57,6 +64,7 @@ $('#done').click(async()=>{
             localStorage.removeItem('questions');
             location.reload();
         }  
+        $('#spinner').css('display', 'none');
     }
     catch(error)
     {

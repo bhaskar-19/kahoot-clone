@@ -9,7 +9,7 @@ $(document).ready(async()=>{
                 "jwttoken": jwttoken
             },
             method: 'GET',
-            url: 'http://localhost:3000/quiz/quizzes/'+uid
+            url: 'http://18.222.118.35:80/quiz/quizzes/'+uid
         });
         if(data.quizzes)
         {

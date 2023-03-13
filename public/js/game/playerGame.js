@@ -8,13 +8,16 @@ const playerId = new URLSearchParams(window.location.search);
 
 socket.on('connect', ()=>{
     const id = playerId.get('id');
-    
     socket.emit('player-join-game', id);
-
-    $('#option1').css("visibility", "visible");
-    $('#option2').css("visibility", "visible");
-    $('#option3').css("visibility", "visible");
-    $('#option4').css("visibility", "visible");
+});
+socket.on('gameQuestions', (questions)=>{
+    console.log("HEREEE TRUEE");
+    console.log(questions);
+    $('#question').html(questions.q1);
+    $('#opt1').html(questions.op1);
+    $('#opt2').html(questions.op2);
+    $('#opt3').html(questions.op3);
+    $('#opt4').html(questions.op4);
 });
 
 socket.on('noGameFound', function(){
@@ -28,7 +31,7 @@ function answerSubmitted(option)
         playerAnswered = true;
 
         socket.emit('playerAnswer', option);
-
+        $('#question').css("visibility", "hidden");
         $('#option1').css("visibility", "hidden");
         $('#option2').css("visibility", "hidden");
         $('#option3').css("visibility", "hidden");
@@ -58,6 +61,7 @@ socket.on('questionOver', ()=>{
         $('#message').css("display", "block");
         $('#message').html("Incorrect!");
     }
+    $('#question').css("visibility", "hidden");
     $('#option1').css("visibility", "hidden");
     $('#option2').css("visibility", "hidden");
     $('#option3').css("visibility", "hidden");
@@ -72,7 +76,7 @@ socket.on('newScore', (playerScore)=>{
 socket.on('nextQuestionPlayer', ()=>{
     correct = false;
     playerAnswered = false;
-
+    $('#question').css("visibility", "visible");
     $('#option1').css("visibility", "visible");
     $('#option2').css("visibility", "visible");
     $('#option3').css("visibility", "visible");
@@ -94,12 +98,20 @@ socket.on('GameOver', ()=>{
     $('body').css('backgroundColor', '#FFFFFF');
     $('#message').css("display", "block");
     $('#message').html("Game Over..!");
-    $('#option1').css("visibility", "hidden");
-    $('#option2').css("visibility", "hidden");
-    $('#option3').css("visibility", "hidden");
-    $('#option4').css("visibility", "hidden");
+    $('#question').css("display", "none");
+    $('#option1').css("display", "none");
+    $('#option2').css("display", "none");
+    $('#option3').css("display", "none");
+    $('#option4').css("display", "none");
+
+    $('#home').css('display', 'block');
 });
 
 socket.on('hostDisconnected', function(){
     window.location.href = "/admin/studentDashboard.html";
 });
+
+function home()
+{
+    window.location.href = "/admin/studentDashboard.html";
+}

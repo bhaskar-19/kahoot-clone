@@ -7,7 +7,7 @@ async function teacher() {
         
         const data = await $.ajax({
             method: 'POST',
-            url: 'http://localhost:3000/authentication/updateRole',
+            url: 'http://18.222.118.35:80/authentication/updateRole',
             data: JSON.stringify(id),
             contentType: 'application/json'
         });
